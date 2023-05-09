@@ -2,6 +2,8 @@ import styles from '@/styles/Home.module.css'
 import StoreCategory from './components/storeCategory'
 import StoreGrid from './components/storeGrid'
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { Book } from '@/models/books';
+import { useState } from 'react';
 
 export default function StoreContent() {
     const queryClient = useQueryClient();
@@ -15,12 +17,16 @@ export default function StoreContent() {
     if (query.isError) {
         return (<span>There was an error </span>)
     }
-    // OVER HERE WEHAVE DATA
+    // OVER HERE WE HAVE DATA
     console.log(query.data)
+    // const [data, setData] = useState<Book[]>([query.data])
+
+    const books = query.data.books
     return (
+
         <div className={styles.storeContent}>
             <StoreCategory />
-            <StoreGrid />
+            <StoreGrid books={...books} />
         </div>
     )
 }
