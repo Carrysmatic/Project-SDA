@@ -1,58 +1,30 @@
-import { GetBooksResponse } from '@/pages/api/books'
+import { Book } from '@/models/books'
 import styles from '@/styles/Home.module.css'
 import Button from '@mui/material/Button'
-import { useState, useEffect } from 'react'
-import { Book } from '@/models/books'
-// props: { books: Book[] }
 
-export default function StoreGrid(props: GetBooksResponse) {
+interface StoreGridProps {
+    books: Array<Book>;
+}
 
-    //query.data.books - > storegrid -> map 
-    const [state, setState] = useState<GetBooksResponse>(props)
-    const [filterState, setFilterState] = useState<Book[]>([])
-    const [searchState, setSearchState] = useState<string>('')
-    useEffect(() => {
-        setFilterState(state.books.filter((book) => book.title.toLowerCase().includes(searchState.toLowerCase())));
-    }, [searchState])
 
+export default function StoreGrid(props: StoreGridProps) {
     return (
-        <>
-            <input type="text" value={searchState} onChange={(e) => setSearchState(e.target.value)} />
+        <div>
             <div className={styles.storeGrid}>
-                {filterState.length > 0 ? filterState.map((props, index) => (
-                    <div className={styles.storeGridItem} key={index}>
-                        <div className={styles.storeGridItemImg}>
-                            <img src={props.image} alt={props.description} />
-                        </div>
-                        <div className={styles.storeGridItemTitle}>{props.title}</div>
-                        <div className={styles.storeGridItemAuthor}>{props.author}</div>
-                        <div className={styles.storeGridItemRelease_date}>
-                            {new Date(props.release_date).toLocaleDateString()}
-                        </div>
-                        <div className={styles.storeGridItemDescription}>{props.description}</div>
-                        <div className={styles.storeGridItemQuantity}>Quantity:{props.quantity}</div>
-                        <div className={styles.storeGridItemPrice}>{props.price}</div>
-                        <div className={styles.storeGridButtons}>
-                            <div className={styles.storeGridItemSeeMore}>
-                                <Button variant="outlined" color="inherit">See more</Button>
-                            </div>
-                            <div className={styles.storeGridItemAdd2Cart}>
-                                <Button variant="outlined" color="inherit">Add to cart</Button>
-                            </div>
-                        </div>
-                    </div>)) : state.books.map((props, index) => (
+                {
+                    props.books.map((book, index) => (
                         <div className={styles.storeGridItem} key={index}>
                             <div className={styles.storeGridItemImg}>
-                                <img src={props.image} alt={props.description} />
+                                <img src={""} alt={""} />
                             </div>
-                            <div className={styles.storeGridItemTitle}>{props.title}</div>
-                            <div className={styles.storeGridItemAuthor}>{props.author}</div>
+                            <div className={styles.storeGridItemTitle}>Title: {book.title}</div>
+                            <div className={styles.storeGridItemAuthor}>Author: {book.author}</div>
                             <div className={styles.storeGridItemRelease_date}>
-                                {new Date(props.release_date).toLocaleDateString()}
+                                Release Date: {new Date(book.release_date).toLocaleDateString()}
                             </div>
-                            <div className={styles.storeGridItemDescription}>{props.description}</div>
-                            <div className={styles.storeGridItemQuantity}>Quantity:{props.quantity}</div>
-                            <div className={styles.storeGridItemPrice}>{props.price}</div>
+                            <div className={styles.storeGridItemDescription}>Description: {book.description}</div>
+                            <div className={styles.storeGridItemQuantity}>Quantity: {book.quantity}</div>
+                            <div className={styles.storeGridItemPrice}>Price: {book.price}</div>
                             <div className={styles.storeGridButtons}>
                                 <div className={styles.storeGridItemSeeMore}>
                                     <Button variant="outlined" color="inherit">See more</Button>
@@ -61,12 +33,10 @@ export default function StoreGrid(props: GetBooksResponse) {
                                     <Button variant="outlined" color="inherit">Add to cart</Button>
                                 </div>
                             </div>
-                        </div>))}
-
-
+                        </div>
+                    ))
+                }
             </div>
-
-
-        </>
+        </div>
     )
 }

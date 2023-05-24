@@ -19,13 +19,40 @@ export default async function handler(
   // Connect to MongoDB on localhost
   await mongoose.connect('mongodb://127.0.0.1/Shop');
   // await bookModel.create({
-  //   title: 'The Lord of the Rings',
-  //   description: 'The Lord of the Rings is an epic high-fantasy novel written by English author and scholar J. R. R. Tolkien.',
-  //   price: 10.99,
-  //   quantity: 10,
-  //   image: 'https://images-na.ssl-images-amazon.com/images/I/51%2Bk5c%2BZBKL._SX331_BO1,204,203,200_.jpg',
-  //   release_date: new Date('1954-07-29')
+  //   title: "Sapiens: A Brief History of Humankind",
+  //   description: "Sapiens: A Brief History of Humankind is a book by Yuval Noah Harari that explores the history of Homo sapiens, from the emergence of our species in Africa to the present day.",
+  //   price: 12.99,
+  //   quantity: 5,
+  //   image: "https://images-na.ssl-images-amazon.com/images/I/51WOaO+VJTL._SX327_BO1,204,203,200_.jpg",
+  //   release_date: "2014-02-10T00:00:00.000+00:00",
+  //   author: "Yuval Noah Harari",
+  //   category: "Non-fiction"
   // })
-  const books = await bookModel.find({});
+  const categoryQueryParameter = req.query.category;
+  const titleQueryParameter = req.query.title;
+  const descriptionQueryParameter = req.query.description
+
+  const filter: mongoose.FilterQuery<Book> = {};
+  if (categoryQueryParameter) {
+    filter.category = categoryQueryParameter;
+  };
+  if (titleQueryParameter) {
+    filter.title = {
+      "$regex": titleQueryParameter,
+      "$options": "i"
+    }
+  };
+  if (descriptionQueryParameter) {
+    filter.description = {
+      "$regex": descriptionQueryParameter,
+      "$options": "i"
+    }
+  }
+  //   // filter.description
+  // }
+
+  // ADD YOUR TITLE SEARCH HERE!!!!!!!!!!!
+
+  const books = await bookModel.find(filter);
   res.status(200).json({ books })
 }

@@ -33,23 +33,6 @@
   background-image: url("../pictures/rhamely-BGThlle8FWY-unsplash.jpg");
 }
 
-/* .contentBody > h1 {
-  width: 50%;
-  padding-left: 90px;
-  color: var(--_text-color);
-  transform: translate(0,200%);
-}
-
-.contentButton {
-  width: 5%;
-  height: 4%;
-  margin-left: 90px;
-  transform: translate(0,500%);
-  background-color: transparent;
-  color:  var(--_red1);
-  border: 1px solid var(--_red1);
-font-weight: bold;
-} */
 
 .contentText {
   display: block;
@@ -125,6 +108,7 @@ font-weight: bold;
   grid-row-gap: 12px;
   margin-top: 40px;
   margin-right: 40px;
+  color: aliceblue;
 }
 
 .storeGridItem {
@@ -138,4 +122,16 @@ font-weight: bold;
 .storeGridButtons {
   display: inline-flex;
   gap: 4px;
+}
+
+.searchBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 400px;
+  margin-left: 400px;
+  height: 40px;
+  background-color: var(--_background);
+  border: 1px solid var(--_red3);
+  width: fit-content;
 }
