@@ -2,21 +2,13 @@ import { useState } from 'react';
 import StoreCategory from './StoreCategory'
 import StoreGrid from './StoreGrid'
 import { useQuery } from '@tanstack/react-query';
-import { set } from 'mongoose';
-
-
-interface SearchStringProps {
-    title: string,
-    description: string
-}
-
+import styles from '@/styles/Home.module.css'
 
 
 export default function StoreContent() {
 
     const [activeCategory, setActiveCategory] = useState<string>("");
-    const [activeTitle, setActiveTitle] = useState<string>("");
-    const [activeDescription, setActiveDescription] = useState<string>("");
+    const [activeSearch, setActiveSearch] = useState<string>("");
 
 
     const categoriesQuery = useQuery({
@@ -29,25 +21,26 @@ export default function StoreContent() {
 
     const categories = categoriesQuery.data?.categories || [];
 
-    // search based on title, description, category using query params
+
+
     const booksQuery = useQuery({
-        queryKey: ['store', activeCategory, activeTitle, activeDescription],
+        queryKey: ['store', activeCategory, activeSearch],
         queryFn: async () => {
             const filters: {
                 category?: string;
-                title?: string;
-                description?: string;
+                // title?: string;
+                search?: string;
+                // description?: string;
             } = {};
             if (activeCategory) {
                 filters.category = activeCategory;
             }
 
-            if (activeTitle) {
-                filters.title = activeTitle;
+            if (activeSearch) {
+                // filters.title = activeSearch;
+                filters.search = activeSearch;
             }
-            if (activeDescription) {
-                filters.description = activeDescription;
-            }
+
             const queryParams = new URLSearchParams(filters).toString();
             const response = await fetch(`http://localhost:3000/api/books?${queryParams}`)
             return response.json();
@@ -60,18 +53,14 @@ export default function StoreContent() {
         setActiveCategory(category);
     };
 
-    // const handleTitleChange = (title: string, description: string) => {
-    //     setActiveTitle(title);
-    //     setActiveDescription(description);
-    // };
 
-    const handleSearchChange = (title: string, description: string) => {
-        setActiveTitle(title);
-        setActiveDescription(description);
+    const handleSearchChange = (search: string) => {
+        setActiveSearch(search);
+
     };
 
     return (
-        <div>
+        <div className={styles.storeContentGrid}>
             {(booksQuery.isLoading || categoriesQuery.isLoading) && <span>Loading...</span>}
             {(booksQuery.isError || categoriesQuery.isError) && <span>There was an error</span>}
 

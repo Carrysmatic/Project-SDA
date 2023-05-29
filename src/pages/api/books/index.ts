@@ -29,30 +29,46 @@ export default async function handler(
   //   category: "Non-fiction"
   // })
   const categoryQueryParameter = req.query.category;
-  const titleQueryParameter = req.query.title;
-  const descriptionQueryParameter = req.query.description
+  // const titleQueryParameter = req.query.title;
+  // const descriptionQueryParameter = req.query.description;
+  const searchQueryParameter = req.query.search;
+
 
   const filter: mongoose.FilterQuery<Book> = {};
   if (categoryQueryParameter) {
     filter.category = categoryQueryParameter;
   };
-  if (titleQueryParameter) {
-    filter.title = {
-      "$regex": titleQueryParameter,
-      "$options": "i"
-    }
-  };
-  if (descriptionQueryParameter) {
-    filter.description = {
-      "$regex": descriptionQueryParameter,
-      "$options": "i"
-    }
+  let searchFilter = {};
+  if (searchQueryParameter) {
+    searchFilter = {
+      $or: [
+        {
+          title: {
+            "$regex": searchQueryParameter,
+            "$options": "i"
+          }
+        },
+        {
+          description: {
+            "$regex": searchQueryParameter,
+            "$options": "i"
+          }
+        },
+        {
+          author: {
+            "$regex": searchQueryParameter,
+            "$options": "i"
+          }
+
+        }
+      ]
+    };
+
   }
-  //   // filter.description
-  // }
+
 
   // ADD YOUR TITLE SEARCH HERE!!!!!!!!!!!
 
-  const books = await bookModel.find(filter);
+  const books = await bookModel.find({ ...filter, ...searchFilter });
   res.status(200).json({ books })
 }

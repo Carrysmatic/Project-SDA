@@ -9,7 +9,7 @@ interface StoreGridProps {
 
 export default function StoreGrid(props: StoreGridProps) {
     return (
-        <div>
+        
             <div className={styles.storeGrid}>
                 {
                     props.books.map((book, index) => (
@@ -37,6 +37,6 @@ export default function StoreGrid(props: StoreGridProps) {
                     ))
                 }
             </div>
-        </div>
+        
     )
 }

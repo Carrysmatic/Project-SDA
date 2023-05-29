@@ -4,21 +4,30 @@ import { useState } from 'react';
 interface StoreCategoryProps {
     categories: Array<string>;
     onCategoryChange: (category: string) => void;
-    onSearchChange: (title: string, description: string) => void;
+    //un parametry la onSearchChange
+    onSearchChange: (search: string) => void;
 }
 export default function StoreCategory(props: StoreCategoryProps) {
     const [selectValue, setSelectValue] = useState<string>("");
+
+
+
+
     return (
-        <div>
-            <div>
+        <div className={styles.storeCategory}>
+            <div >
                 <input type="text" placeholder="Search book here"
+                className={styles.storeInput}
                     onChange={(e) => {
-                        props.onSearchChange(e.target.value, e.target.value)
+                        props.onSearchChange(
+                            e.target.value
+                        )
                     }
                     }
                 />
             </div>
             <select name="category" value={selectValue} id="category"
+            className={styles.storeSelect}
                 onChange={(e) => {
                     e.preventDefault();
                     setSelectValue(e.target.value)
