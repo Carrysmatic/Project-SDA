@@ -17,7 +17,8 @@ export default function StoreCategory(props: StoreCategoryProps) {
         <div className={styles.storeCategory}>
             <div >
                 <input type="text" placeholder="Search book here"
-                className={styles.storeInput}
+                    name="text"
+                    className={styles.storeInput}
                     onChange={(e) => {
                         props.onSearchChange(
                             e.target.value
@@ -27,7 +28,7 @@ export default function StoreCategory(props: StoreCategoryProps) {
                 />
             </div>
             <select name="category" value={selectValue} id="category"
-            className={styles.storeSelect}
+                className={styles.storeSelect}
                 onChange={(e) => {
                     e.preventDefault();
                     setSelectValue(e.target.value)

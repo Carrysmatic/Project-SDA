@@ -29,7 +29,7 @@
 }
 
 .contentBody {
-  height: 100%;
+  height: 92vh;
   background-image: url("../pictures/rhamely-BGThlle8FWY-unsplash.jpg");
 }
 
@@ -111,6 +111,7 @@
   justify-content: center;
   align-items: center;
   gap: 4px;
+  color: var(--_text-color);
 }
 
 .storeGridButtons {
@@ -126,7 +127,7 @@
   gap: 24px;
 }
 
-.storeInput {
+/* .storeInput {
   padding: 8px;
   font-size: 16px;
   border-width: 2px;
@@ -140,6 +141,39 @@
 }
 .storeInput:focus {
   outline: none;
+} */
+
+.storeInput {
+  max-width: 190px;
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.storeInput:valid {
+  border-color: #ff0000;
+  color: #ff0000;
+  box-shadow: 2px 2px 8px 1px #ff0000;
+  translate: -8px 8px 0px 0px;
+}
+
+.storeInput:invalid {
+  border-color: #ff0000;
+  color: #ff0000;
+  box-shadow: 2px 2px 8px 1px #ff0000;
+  translate: -8px 8px 0px 0px;
+}
+
+.text {
+  margin-top: 10px;
+  color: black;
 }
 .storeSelect {
   background-color: var(--_background);
@@ -154,48 +188,159 @@
   outline: none;
 }
 
-/* 
-.storeContent {
-  display: grid;
-  height: 100%;
-  grid-template-columns: 0.5fr 1.5fr;
-  background-color: var(--_background);
+.btn {
+  --btn-default-bg: rgb(41, 41, 41);
+  --btn-padding: 15px 20px;
+  --btn-hover-bg: rgb(51, 51, 51);
+  --btn-transition: 0.3s;
+  --btn-letter-spacing: 0.1rem;
+  --btn-animation-duration: 1.2s;
+  --btn-shadow-color: rgba(0, 0, 0, 0.137);
+  --btn-shadow: 0 2px 10px 0 var(--btn-shadow-color);
+  --hover-btn-color: var(--_text-color);
+  --default-btn-color: #fff;
+  --font-size: 16px;
+  /* 👆 this field should not be empty */
+  --font-weight: 600;
+  --font-family: Menlo, Roboto Mono, monospace;
+  /* 👆 this field should not be empty */
 }
 
-.storeCategory {
-  grid-area: 1 / 1 / 2 / 2;
-  height: auto;
-  border: 2px solid var(--_red3);
-  border-radius: 8px;
-  /* margin-left: 40px;
-  margin-top: 80px; */
-/* margin-left: 7%;
-  margin-top: 15%;
-  position: fixed;
-}
+/* button settings 👆 */
 
-.storeCategoryTitle > ul {
+.btn {
+  box-sizing: border-box;
+  padding: var(--btn-padding);
   display: flex;
-  flex-direction: column;
-  list-style: none;
   align-items: center;
-  padding-right: 40px;
-  margin: 24px 0;
-  color: var(--_red1);
+  justify-content: center;
+  color: var(--default-btn-color);
+  font: var(--font-weight) var(--font-size) var(--font-family);
+  background: var(--btn-default-bg);
+  border: none;
+  cursor: pointer;
+  transition: var(--btn-transition);
+  overflow: hidden;
+  box-shadow: var(--btn-shadow);
 }
 
-.storeGrid {
-  display: grid;
-  grid-area: 1 / 2 / 2 / 3;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  grid-column-gap: 12px;
-  grid-row-gap: 12px;
-  margin-top: 40px;
-  margin-right: 40px;
-  color: aliceblue;
+.btn span {
+  letter-spacing: var(--btn-letter-spacing);
+  transition: var(--btn-transition);
+  box-sizing: border-box;
+  position: relative;
+  background: inherit;
 }
 
+.btn span::before {
+  box-sizing: border-box;
+  position: absolute;
+  content: "";
+  background: inherit;
+}
 
+.btn:hover,
+.ui-btn:focus {
+  background: var(--btn-hover-bg);
+}
 
- */
+.btn:hover span,
+.ui-btn:focus span {
+  color: var(--hover-btn-color);
+}
+
+.btn:hover span::before,
+.ui-btn:focus span::before {
+  animation: chitchat linear both var(--btn-animation-duration);
+}
+
+@keyframes chitchat {
+  0% {
+    content: "#";
+  }
+
+  5% {
+    content: ".";
+  }
+
+  10% {
+    content: "^{";
+  }
+
+  15% {
+    content: "-!";
+  }
+
+  20% {
+    content: "#$_";
+  }
+
+  25% {
+    content: "№:0";
+  }
+
+  30% {
+    content: "#{+.";}35%{content: "@}-?";
+  }
+
+  40% {
+    content: "?{4@%";
+  }
+
+  45% {
+    content: "=.,^!";
+  }
+
+  50% {
+    content: "?2@%";
+  }
+
+  55% {
+    content: "\;1}]";
+  }
+
+  60% {
+    content: "?{%:%";
+    right: 0;
+  }
+
+  65% {
+    content: "|{f[4";
+    right: 0;
+  }
+
+  70% {
+    content: "{4%0%";
+    right: 0;
+  }
+
+  75% {
+    content: "'1_0<";
+    right: 0;
+  }
+
+  80% {
+    content: "{0%";
+    right: 0;
+  }
+
+  85% {
+    content: "]>'";
+    right: 0;
+  }
+
+  90% {
+    content: "4";
+    right: 0;
+  }
+
+  95% {
+    content: "2";
+    right: 0;
+  }
+
+  100% {
+    content: "";
+    right: 0;
+  }
+}
