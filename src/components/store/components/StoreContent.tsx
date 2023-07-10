@@ -65,7 +65,7 @@ export default function StoreContent() {
             {(booksQuery.isError || categoriesQuery.isError) && <span>There was an error</span>}
 
             <StoreCategory categories={categories} onSearchChange={handleSearchChange} onCategoryChange={handleFilterChange} />
-            <StoreGrid books={books} id={''} />
+            <StoreGrid books={books}  />
         </div>
     )
 }

@@ -29,8 +29,6 @@ export default async function handler(
   //   category: "Non-fiction"
   // })
   const categoryQueryParameter = req.query.category;
-  // const titleQueryParameter = req.query.title;
-  // const descriptionQueryParameter = req.query.description;
   const searchQueryParameter = req.query.search;
 
 

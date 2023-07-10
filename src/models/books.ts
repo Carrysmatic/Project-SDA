@@ -10,7 +10,7 @@ export interface Book {
     // image: string;
     release_date: Date;
     category: string;
-    id: string;
+    _id: string;
 }
 
 export const bookSchema = new mongoose.Schema<Book>({
@@ -22,7 +22,9 @@ export const bookSchema = new mongoose.Schema<Book>({
     // image: String,
     release_date: Date,
     category: String,
-    id: String
+    _id: {
+        $oid: String
+    }
 });
 
 // We manually create a book model, this isn't great but TS and mongoose and NextJS don't play well together

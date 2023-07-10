@@ -4,7 +4,6 @@ import { useState } from 'react';
 interface StoreCategoryProps {
     categories: Array<string>;
     onCategoryChange: (category: string) => void;
-    //un parametry la onSearchChange
     onSearchChange: (search: string) => void;
 }
 export default function StoreCategory(props: StoreCategoryProps) {
