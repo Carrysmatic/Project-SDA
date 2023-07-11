@@ -32,7 +32,6 @@ export default function StoreGrid(props: StoreGridProps) {
                     </div>
                     <div className={styles.storeGridItemQuantity}>
                         Quantity: {book.quantity}
-                        ID: {book._id}
                     </div>
                     <div className={styles.storeGridItemPrice}>Price: {book.price}</div>
                     <div className={styles.storeGridButtons}>
@@ -44,10 +43,10 @@ export default function StoreGrid(props: StoreGridProps) {
                         <div className={styles.storeGridItemAdd2Cart}>
                             {!isInCart(book._id) ? (
                                 <Button variant="outlined" color="inherit" onClick={() => addToCart(book)}>
-                                    Add to cart
+                                    Add
                                 </Button>) : (
                                 <Button variant="outlined" color="inherit" onClick={() => removeFromCart(book._id)}>
-                                    Remove from cart
+                                    Remove
                                 </Button>)
                             }
                         </div>

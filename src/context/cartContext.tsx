@@ -11,6 +11,9 @@ type ShoppingCartContext = {
     removeFromCart: (id: string) => void;
     editCart: (id: string, quantity: number) => void;
     clearCart: () => void;
+    increaseCart: (id: string) => void;
+    decreaseCart: (id: string) => void;
+
 }
 export function shoppingCart() {
     return useContext(ShoppingCartContext)
@@ -19,15 +22,22 @@ export function shoppingCart() {
 type ShoppingCartProviderProps = {
     children: ReactNode
 }
+
+interface CartBook extends Book {
+    maxQuantity: number;
+}
+
 export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
-    const [cartItems, setCartItems] = useState<Book[]>([])
+    const [cartItems, setCartItems] = useState<CartBook[]>([])
 
 
     function addToCart(item: Book) {
-        setCartItems(cartItems => [...cartItems, item]);
+        const newItem = { ...item, quantity: 1, maxQuantity: item.quantity };
+        setCartItems(cartItems => [...cartItems, newItem]);
     }
 
     function isInCart(id: string) {
+
         return cartItems.find(item => item._id === id) ? true : false;
     }
 
@@ -37,6 +47,21 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
 
     function editCart(id: string, quantity: number) {
         setCartItems(cartItems => cartItems.map(item => item._id === id ? { ...item, quantity } : item));
+    }
+
+    function increaseCart(id: string) {
+        setCartItems(cartItems => cartItems.map(item =>
+            item._id === id
+                ? { ...item, quantity: item.quantity >= item.maxQuantity ? item.maxQuantity : item.quantity + 1 }
+                : item
+        ));
+    }
+    function decreaseCart(id: string) {
+        setCartItems(cartItems => cartItems.map(item =>
+            item._id === id
+                ? { ...item, quantity: item.quantity <= 1 ? 1 : item.quantity - 1 }
+                : item
+        ));
     }
 
     function clearCart() {
@@ -49,7 +74,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
 
 
     return (
-        <ShoppingCartContext.Provider value={{ cartItems, removeFromCart, editCart, isInCart, addToCart, clearCart }}>
+        <ShoppingCartContext.Provider value={{ decreaseCart, increaseCart, cartItems, removeFromCart, editCart, isInCart, addToCart, clearCart }}>
             {children}
         </ShoppingCartContext.Provider>
     )
