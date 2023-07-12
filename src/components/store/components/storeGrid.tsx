@@ -36,18 +36,17 @@ export default function StoreGrid(props: StoreGridProps) {
                     <div className={styles.storeGridItemPrice}>Price: {book.price}</div>
                     <div className={styles.storeGridButtons}>
                         <div className={styles.storeGridItemSeeMore}>
-                            <Button variant="outlined" color="inherit">
-                                See more
-                            </Button>
+                            <button className={styles.button57} role="button"><span>Hover me</span><span>To see more</span></button>
+
                         </div>
                         <div className={styles.storeGridItemAdd2Cart}>
                             {!isInCart(book._id) ? (
-                                <Button variant="outlined" color="inherit" onClick={() => addToCart(book)}>
+                                <button className={styles.button51} onClick={() => addToCart(book)}>
                                     Add
-                                </Button>) : (
-                                <Button variant="outlined" color="inherit" onClick={() => removeFromCart(book._id)}>
+                                </button>) : (
+                                <button className={styles.button51} onClick={() => removeFromCart(book._id)}>
                                     Remove
-                                </Button>)
+                                </button>)
                             }
                         </div>
 

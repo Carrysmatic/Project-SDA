@@ -9,7 +9,6 @@ type ShoppingCartContext = {
     isInCart: (id: string) => boolean;
     addToCart: (item: Book) => void;
     removeFromCart: (id: string) => void;
-    editCart: (id: string, quantity: number) => void;
     clearCart: () => void;
     increaseCart: (id: string) => void;
     decreaseCart: (id: string) => void;
@@ -37,16 +36,11 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     }
 
     function isInCart(id: string) {
-
         return cartItems.find(item => item._id === id) ? true : false;
     }
 
     function removeFromCart(id: string) {
         setCartItems(state => state.filter(item => item._id !== id));
-    }
-
-    function editCart(id: string, quantity: number) {
-        setCartItems(cartItems => cartItems.map(item => item._id === id ? { ...item, quantity } : item));
     }
 
     function increaseCart(id: string) {
@@ -74,7 +68,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
 
 
     return (
-        <ShoppingCartContext.Provider value={{ decreaseCart, increaseCart, cartItems, removeFromCart, editCart, isInCart, addToCart, clearCart }}>
+        <ShoppingCartContext.Provider value={{ decreaseCart, increaseCart, cartItems, removeFromCart, isInCart, addToCart, clearCart }}>
             {children}
         </ShoppingCartContext.Provider>
     )

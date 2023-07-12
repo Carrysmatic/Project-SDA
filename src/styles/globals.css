@@ -7,7 +7,7 @@
   font-family: "Roboto", sans-serif;
   margin: 0;
   --_text-color: white;
-  --_background: #1a1a1d;
+  --_background: rgb(0, 30, 60);
   --_red1: #6f2232;
   --_red2: #950740;
   --_red3: #c3073f;
@@ -64,7 +64,7 @@ a {
   color: var(--_red1);
   text-decoration: none;
 }
-
+/* 
 button {
   width: 10em;
   position: relative;
@@ -108,4 +108,4 @@ button:hover::after {
 
 button:hover {
   box-shadow: inset 0px 0px 25px #1479ea;
-}
+} */

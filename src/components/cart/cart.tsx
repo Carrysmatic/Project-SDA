@@ -2,16 +2,14 @@ import { shoppingCart } from "@/context/cartContext";
 import styles from "@/styles/Home.module.css";
 import Button from "@mui/material/Button";
 import Link from "next/link";
+import { numberFormatter } from "@/utils/utils";
 
 
 
 export function CartShop() {
 
     const { cartItems, clearCart, increaseCart, decreaseCart } = shoppingCart();
-    const numberFormatter = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-    })
+
 
     return (
         <>
@@ -19,8 +17,7 @@ export function CartShop() {
                 {cartItems.map((book, index) => (
                     <div className={styles.CartUnique} key={index}>
                         <div className={styles.CartText}>
-                            <div className={styles.CartTextChild}>Title: {book.title}</div>
-                            <div className={styles.CartTextChild}>Author: {book.author}</div>
+                            <div className={styles.CartTextChild}>{book.title}</div>
                         </div>
                         <div className={styles.CartText}>
                             <Button variant="outlined" color="inherit" onClick={() => decreaseCart(book._id)}> - </Button>
@@ -34,7 +31,7 @@ export function CartShop() {
                 }
                 <div className={styles.CartUnique} >
                     <div className={styles.CartTextChild}>Total Price: {numberFormatter.format(cartItems.reduce((acc, book) => acc + book.price * book.quantity, 0))}</div>
-                    <Button variant="outlined" color="inherit">Checkout</Button>
+                    <Button className={styles.CartButton} variant="outlined" color="inherit">Checkout</Button>
                     {cartItems.length === 0 ? <div><Link href="/store">
                         Go to Store
                     </Link></div>
