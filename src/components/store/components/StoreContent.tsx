@@ -9,8 +9,9 @@ export default function StoreContent() {
 
     const [activeCategory, setActiveCategory] = useState<string>("");
     const [activeSearch, setActiveSearch] = useState<string>("");
+    const [pageNo, setPageNo] = useState<number>(0);
 
-
+    const perPage = 5;
     const categoriesQuery = useQuery({
         queryKey: ['store', 'categories'],
         queryFn: async () => {
@@ -21,31 +22,32 @@ export default function StoreContent() {
 
     const categories = categoriesQuery.data?.categories || [];
 
-
-
     const booksQuery = useQuery({
-        queryKey: ['store', activeCategory, activeSearch],
+        queryKey: ['store', activeCategory, activeSearch, pageNo],
         queryFn: async () => {
             const filters: {
                 category?: string;
-                // title?: string;
                 search?: string;
-                // description?: string;
+                perPage?: string;
+                pageNo?: string;
             } = {};
             if (activeCategory) {
                 filters.category = activeCategory;
             }
 
             if (activeSearch) {
-                // filters.title = activeSearch;
                 filters.search = activeSearch;
             }
+
+            filters.pageNo = String(pageNo);
+            filters.perPage = String(perPage);
 
             const queryParams = new URLSearchParams(filters).toString();
             const response = await fetch(`http://localhost:3000/api/books?${queryParams}`)
             return response.json();
         }
     });
+
     const books = booksQuery.data?.books || [];
 
     // get serverside props - nextjs - getStaticProps
@@ -59,13 +61,32 @@ export default function StoreContent() {
 
     };
 
+    const handleNextPage = () => {
+        if (books.length < perPage) return;
+        setPageNo((state) => state + 1);
+
+    };
+
+    const handlePrevPage = () => {
+        if (pageNo === 0) return;
+        setPageNo((state) => state - 1);
+    };
+
+
+
     return (
         <div className={styles.storeContentGrid}>
             {(booksQuery.isLoading || categoriesQuery.isLoading) && <span>Loading...</span>}
             {(booksQuery.isError || categoriesQuery.isError) && <span>There was an error</span>}
 
             <StoreCategory categories={categories} onSearchChange={handleSearchChange} onCategoryChange={handleFilterChange} />
-            <StoreGrid books={books}  />
+            <StoreGrid books={books} />
+            <div>
+                <button onClick={handlePrevPage}>Prev</button>
+                <div>{pageNo + 1}</div>
+                <button onClick={handleNextPage}>Next</button>
+            </div>
+
         </div>
     )
 }

@@ -1,6 +1,5 @@
 import { Book } from "@/models/books";
 import styles from "@/styles/Home.module.css";
-import Button from "@mui/material/Button";
 import { shoppingCart } from "@/context/cartContext";
 
 interface StoreGridProps {
@@ -10,8 +9,6 @@ interface StoreGridProps {
 export default function StoreGrid(props: StoreGridProps) {
 
     const { addToCart, removeFromCart, isInCart, cartItems } = shoppingCart();
-
-    console.log({ books: props.books })
 
     return (
         <div className={styles.storeGrid}>

@@ -30,7 +30,9 @@ export default async function handler(
   // })
   const categoryQueryParameter = req.query.category;
   const searchQueryParameter = req.query.search;
-
+  const perPage = req.query.perPage;
+  const pageNo = req.query.pageNo;
+  console.log(perPage, pageNo)
 
   const filter: mongoose.FilterQuery<Book> = {};
   if (categoryQueryParameter) {
@@ -68,6 +70,6 @@ export default async function handler(
 
 
 
-  const books = await bookModel.find({ ...filter, ...searchFilter });
+  const books = await bookModel.find({ ...filter, ...searchFilter }, {}, { skip: Number(pageNo) * Number(perPage), limit: Number(perPage) });
   res.status(200).json({ books })
 }
