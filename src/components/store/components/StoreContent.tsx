@@ -81,10 +81,10 @@ export default function StoreContent() {
 
             <StoreCategory categories={categories} onSearchChange={handleSearchChange} onCategoryChange={handleFilterChange} />
             <StoreGrid books={books} />
-            <div>
-                <button onClick={handlePrevPage}>Prev</button>
-                <div>{pageNo + 1}</div>
-                <button onClick={handleNextPage}>Next</button>
+            <div className={styles.storeButtons}>
+                <button className={styles.button51} onClick={handlePrevPage}>Prev</button>
+                <div className={styles.pageNo}>{pageNo + 1}</div>
+                <button className={styles.button51} onClick={handleNextPage}>Next</button>
             </div>
 
         </div>

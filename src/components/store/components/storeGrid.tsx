@@ -33,7 +33,7 @@ export default function StoreGrid(props: StoreGridProps) {
                     <div className={styles.storeGridItemPrice}>Price: {book.price}</div>
                     <div className={styles.storeGridButtons}>
                         <div className={styles.storeGridItemSeeMore}>
-                            <button className={styles.button57} role="button"><span>Hover me</span><span>To see more</span></button>
+                            <button className={styles.button51} role="button"><span>To see more</span></button>
 
                         </div>
                         <div className={styles.storeGridItemAdd2Cart}>

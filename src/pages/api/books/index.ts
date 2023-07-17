@@ -32,7 +32,7 @@ export default async function handler(
   const searchQueryParameter = req.query.search;
   const perPage = req.query.perPage;
   const pageNo = req.query.pageNo;
-  console.log(perPage, pageNo)
+
 
   const filter: mongoose.FilterQuery<Book> = {};
   if (categoryQueryParameter) {
