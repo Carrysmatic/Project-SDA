@@ -124,11 +124,11 @@
 
 .storeCategory {
   position: fixed;
-  margin-left: 24px;
   display: flex;
   flex-direction: column;
   gap: 24px;
   margin-top: 20%;
+  margin-left: 40px;
 }
 
 .storeInput {
