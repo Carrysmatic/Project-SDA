@@ -7,7 +7,6 @@ export interface Book {
     description: string;
     price: number;
     quantity: number;
-    // image: string;
     release_date: Date;
     category: string;
     _id: string;
@@ -19,7 +18,6 @@ export const bookSchema = new mongoose.Schema<Book>({
     description: String,
     price: Number,
     quantity: Number,
-    // image: String,
     release_date: Date,
     category: String,
     _id: {
@@ -27,11 +25,8 @@ export const bookSchema = new mongoose.Schema<Book>({
     }
 });
 
-// We manually create a book model, this isn't great but TS and mongoose and NextJS don't play well together
 type bookModel = Model<Book, {}, {}>;
 
-// Hack to reuse the model when nextjs recompiles
-// Remember to restart the server when the model changes
 export const bookModel = (mongoose.models.Book as bookModel) || mongoose.model('Book', bookSchema, "Books");
 
 

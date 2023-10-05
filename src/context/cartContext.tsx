@@ -29,7 +29,6 @@ interface CartBook extends Book {
 export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     const [cartItems, setCartItems] = useState<CartBook[]>([])
 
-
     function addToCart(item: Book) {
         const newItem = { ...item, quantity: 1, maxQuantity: item.quantity };
         setCartItems(cartItems => [...cartItems, newItem]);
@@ -61,11 +60,8 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     function clearCart() {
         setCartItems([]);
     }
-    // show id from cartItems
+  
     console.log(cartItems)
-
-    // add , remove , increase(edit), 
-
 
     return (
         <ShoppingCartContext.Provider value={{ decreaseCart, increaseCart, cartItems, removeFromCart, isInCart, addToCart, clearCart }}>

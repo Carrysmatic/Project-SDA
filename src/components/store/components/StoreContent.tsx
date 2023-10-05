@@ -49,8 +49,6 @@ export default function StoreContent() {
     });
 
     const books = booksQuery.data?.books || [];
-
-    // get serverside props - nextjs - getStaticProps
     const handleFilterChange = (category: string) => {
         setActiveCategory(category);
     };
@@ -82,9 +80,11 @@ export default function StoreContent() {
             <StoreCategory categories={categories} onSearchChange={handleSearchChange} onCategoryChange={handleFilterChange} />
             <StoreGrid books={books} />
             <div className={styles.storeButtons}>
-                <button className={styles.button51} onClick={handlePrevPage}>Prev</button>
+                <button className={styles.buttonPag}
+                 onClick={handlePrevPage}>Prev</button>
                 <div className={styles.pageNo}>{pageNo + 1}</div>
-                <button className={styles.button51} onClick={handleNextPage}>Next</button>
+                <button className={styles.buttonPag}
+                 onClick={handleNextPage}>Next</button>
             </div>
 
         </div>

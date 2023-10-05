@@ -12,22 +12,10 @@ export default async function handler(
   res: NextApiResponse<GetBooksResponse>
 ) {
 
-  // TODO:
-  // Get the username and password from the environment variables
-  // Cache the mongo connection
 
   // Connect to MongoDB on localhost
   await mongoose.connect('mongodb://127.0.0.1/Shop');
-  // await bookModel.create({
-  //   title: "Sapiens: A Brief History of Humankind",
-  //   description: "Sapiens: A Brief History of Humankind is a book by Yuval Noah Harari that explores the history of Homo sapiens, from the emergence of our species in Africa to the present day.",
-  //   price: 12.99,
-  //   quantity: 5,
-  //   image: "https://images-na.ssl-images-amazon.com/images/I/51WOaO+VJTL._SX327_BO1,204,203,200_.jpg",
-  //   release_date: "2014-02-10T00:00:00.000+00:00",
-  //   author: "Yuval Noah Harari",
-  //   category: "Non-fiction"
-  // })
+
   const categoryQueryParameter = req.query.category;
   const searchQueryParameter = req.query.search;
   const perPage = req.query.perPage;

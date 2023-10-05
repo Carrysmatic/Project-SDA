@@ -37,10 +37,7 @@ export function CartShop() {
                     </Link></div>
                         : <Button variant="outlined" color="inherit" onClick={() => clearCart()}>Clear Cart</Button>}
                 </div>
-                {/* map -> lista de carti , display title price Quant si edit 
-         
-         total price at the end
-            */}
+             
             </div>
 
         </>
